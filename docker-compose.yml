@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+
+  db:
+        image: mariadb:10.4
+        container_name: anglebroking
+        environment:
+            MYSQL_ROOT_PASSWORD: "1234"
+            MYSQL_DATABASE: BTS
+            MYSQL_USER: root
+            MYSQL_ROOT_HOST: "%"
+        ports:
+            - 3306:3306
+        restart: on-failure
+        volumes:
+            - ${PWD}/mariadb:/var/lib/mysql
+
+  cache:
+        container_name: anglebroking-cache
+        image: redis:latest
+        restart: on-failure:3
+        ports:
+        - "6379:6379"
+        expose:
+        - "6379"

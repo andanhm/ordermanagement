@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package anglebroking.stock.order.v1;
+
+option go_package = "anglebroking/stock/order/v1";
+
+enum Status {
+    PENDING = 0;
+    SUCCESS = 1;
+    FAILED = 2;
+}
+
+// Response represent health status of the application
+message Details {
+    int64 id = 1;
+    int64 customerID = 2;
+    int64 amount = 3;
+    Status status = 4;
+}
+
+// Order service definition monitors the underlying services that iam-broker relies on.
+service Order {
+    // Create service — a method similar to a ping that reports whether the service is up or down.
+    rpc Create (Details) returns (Details) {}
+    // Create service — a method similar to a ping that reports whether the service is up or down.
+    rpc Update (Details) returns (Details) {}
+    // Create service — a method similar to a ping that reports whether the service is up or down.
+    rpc Status (Details) returns (Details) {}
+}

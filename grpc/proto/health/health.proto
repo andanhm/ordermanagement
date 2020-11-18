@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package anglebroking.stock.health.v1;
+
+option go_package = "anglebroking/stock/health/v1";
+
+import "google/protobuf/empty.proto";
+
+
+// Response represent health status of the application
+message Response {
+    string host = 1;
+    string version = 2;
+    string commit = 3;
+    string startedAt = 4;
+    string country = 5;
+    string env = 6;
+    map<string,string> external = 7;
+}
+
+// Health service definition monitors the underlying services that iam-broker relies on.
+service Health {
+    // Check service — a method similar to a ping that reports whether the service is up or down.
+    rpc Check (google.protobuf.Empty) returns (Response) {}
+}
